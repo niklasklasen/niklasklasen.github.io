@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  "Test Post"
+title:  "Third Post"
 toc: true
 ---
 **Start**
