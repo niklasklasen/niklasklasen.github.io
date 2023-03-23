@@ -60,7 +60,7 @@ The next step is to assign a policy to trigger the automatic updates for the ser
 
 In this step I'm not adding any servers to the maintenance configuration, that will be handled later by a policy assigned to the desired scope. 
 
-In the Updates step you select what type of updates to include in this maintenance configuration. You can also specify if any specific KBs ouf packages should be included or excluded. In this demo I'm including all classifications of updates.
+In the Updates step you select what type of updates to include in this maintenance configuration. You can also specify if any specific KBs or packages should be included or excluded. In this demo I'm including all classifications of updates.
 
 ![](/assets/img/umc-maintenance-configuration-updates.png)
 
