@@ -5,7 +5,7 @@ categories:
   - Azure
 toc: true
 ---
-As long as we use virtual machines patch management will allway be something that we need to be on top of. I resently came a cross a case where a customer wanted to update the way they managed patching for their virtual machines, both in Azure and on-prem. This led me to try out the service Update Managment Center (Preview). One thing that caught my attention right of the bat was the posibility to mangaed patching through the use of Azure Policies. That is a big upside since utilizing a policy drivenframework to govern Azure resources eases the administrative burden of IT departments and makes sure that you are compliant towards your own governance framework.
+As long as we use virtual machines patch management will allway be something that we need to be on top of. I recently came a cross a case where a customer wanted to update the way they managed patching for their virtual machines, both in Azure and on-prem. This led me to try out the service Update Managment Center (Preview). One thing that caught my attention right of the bat was the posibility to mangaed patching through the use of Azure Policies. That is a big upside since utilizing a policy drivenframework to govern Azure resources eases the administrative burden of IT departments and makes sure that you are compliant towards your own governance framework.
 So what is Update Management Center (Preview) and how do you get started with it? 
 
 # Update Managment Center (Preview)
