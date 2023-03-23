@@ -4,6 +4,7 @@ title:  "Configuring Update Management Center (Preview) with policies"
 categories: 
   - Azure
 toc: true
+show_date: true
 ---
 As long as we use virtual machines patch management will always be something that we need to be on top of. I recently came a cross a case where a customer wanted to update the way they managed patching for their virtual machines, both in Azure and on-prem. This led me to try out the service Update Management Center (Preview). One thing that caught my attention right of the bat was the possibility to manage patching through the use of Azure Policies. That is a big upside since utilizing a policy driven framework to govern Azure resources eases the administrative burden of IT departments and makes sure that you are compliant towards your own governance framework.
 So what is Update Management Center (Preview) and how do you get started with it? 
