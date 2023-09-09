@@ -33,11 +33,16 @@ The recomendation I give to the companies that I work with are to use one subscr
 
 As of today, you can give an application team the RBAC role Contributor without them beeing able to alter or remove any policies thet the subscription needs to be compliant to, and they can't move the subscription out from your tenant. When you have this structure in place along with a good RBAC strategy and policy framework, your IT department can breathe a little easier whil still allow agility for the deveplopers. 
 
+![](/assets/img/ESL-MS.svg)
+
 # Platform Landing Zones vs. Application Landing Zones
 In the Platform Landing Zone Subscriptions we deploy workloads or applications that provides a shared service for the allpications in the Application Landing Zones. In the Enterprise Scale Landing Zone concept we start with 3 Platform Landing Zone Subscriptions, Connectivity, Identity and Management. Here are some examples for what each of them can host:
-- *Connectivity* - This will be your central connectivity hub. This is where all the Corp Application Landing Zones are peered toghter and where your Azure environment is connected to your on-premise datacenters. 
-- *Management* - Here deploy Platform Landing Zones for patch management and/or central logging. 
-- *Identity* - If there is a need for bringing Domain Conrollers to Azure they will live in a Platfrom Landing Zone here.
+- **Connectivity** - This will be your central connectivity hub. This is where all the Corp Application Landing Zones are peered toghter and where your Azure environment is connected to your on-premise datacenters. 
+- **Management** - Here deploy Platform Landing Zones for patch management and/or central logging. 
+- **Identity** - If there is a need for bringing Domain Conrollers to Azure they will live in a Platfrom Landing Zone here.
 Usually these Landing Zones are managed by a central team, but the design also allows for more granular access control to these Subscriptions if needed.
 
 An Application Landing Zone Subscription is intended to host a single application. There are two flavours for Application Landing Zones, Corp and Online. A Corp Application Landing Zone is meant to be published internally through the central connectivity hub. To reduce the attack vectros we don't allow Corp Application Landing Zones to have therir own public access point, i.e. a Public IP address. The Online Application Landing Zone is something that is meant to be accessesed externally, wo here we do allow the landing zone to contain it's own public access point. However we don't allow this landing zone to be connected to the central connectivity hub. These Online Application Landing Zones will almost be their own isolated islands. 
+
+To get some more inspiration and test this concept in your own environment, have a look at these implementarion options that Microsoft has documented.
+**[Landing Zone Implementation Options](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/implementation-options#implementation-options)**
