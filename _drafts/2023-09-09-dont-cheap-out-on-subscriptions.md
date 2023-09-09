@@ -8,7 +8,7 @@ show_date: true
 ---
 I have seen envrionments in Azure that are built around one or two subscriptions, usualy one for Production and one for Development/Testing. In these cases Resource Groups was used to provide some strucure in these Subscriptions. This is limiting the flexibility in how we can structure our environment and enforce a scalable governance framework. I am aware that this was the standard a couple of years back and that Microsoft preached this as the best practise when building your Azure environment. But as alot of other things in Azure the view on this has changed as well. 
 
-**IMAGE ELS
+![](/assets/img/ESL.png)
 
 In the Cloud Adoption Framework (CAF) we are introduced to Enterprise Scale Landing Zone architecture. (fig. 1) There are two things that clearly dfferentiates from the old model of gathering all resources in to two Subscriptions. 
   1. We are introducing the Management Group layer on top of the Subscriptions
@@ -17,7 +17,7 @@ This allows you to enforce a governance framework on a more granular level. In t
 
 Frist of there are a few limits to know when we are working with Management Groups and Subscriptions. In one tenant you can deploy 10.000 Management Groups and they can be 6 levles deep, not including the Tennant Root or Subsciptions. The limits for Subscriptions is not in the numbers that you can deploy, since the documented limit there is "unlimited", it's in how much of sertian resources within a subscription. For example you are limitied to 980 Resource Groups per Subscription.
 
-*** IMAGE MGMT GRP & SUB LIMITS
+![](/assets/img/ESL-limits.png)
 
 # Management Groups
 Management Groups are used to hirarki and arease in the way we apply our governance framework. Everything you assign to a Management Group, wheter it's policies or RBAC role assignments they will be inherrited vertically down in the structure. They do not inherrit horizataly in the structure. As an example a RBAC role assignement added to the Management Group "Platform" will be inherrited to the Management Groups "Identity", "Management" and "Connectivity" and all the subscriptions that resides within them. How ever it will not be applied to the Management Group "LandingZones". 
@@ -27,7 +27,6 @@ The structure presented in the Enterprise Scale Landing Zone architecure is desi
 # Subscriptions
 Don't hold back when the organization ask for new subscriptions to build their applications in. If you have your Management Groups in order and the Azure Polices in place, adding extra subscriptions won't be a burden for you. Rather see them as container where your developers or other users can develop och try out new things. If the thing that they tried out works you already have it in a separe container that is organized with the correct governance rules, and it's a product that dosen't work you can just decommision the whole Subscription.
 
-*** NOTE
 Be very causious when handing out the RBAC role "Owner", even on Subscriptions. As an Owner you can migrate the Subscription to another Tenant. The effect would for your organization will be that you are still carrying the cost for this Subscription but you won't be able to see it. Even wors, all the guardails you implemented with RBAC and Azure Policies will not effect the Subscription once it's moved out.
 
 So the recomendation I give to the companies that I work with are to use one subscription (or two, ptoduction and development) for each of the applications or workloads that are built or moved in to Azure. Give the application owners the freedom they need to build and test their application without worring that they will break something else in the environment. That sense of security goes both ways, for both the application team and the IT department responsiblr for the Azure environment. 
