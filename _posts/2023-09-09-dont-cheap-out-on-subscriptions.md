@@ -40,6 +40,7 @@ In the Platform Landing Zone subscriptions we deploy workloads or applications t
 - **Connectivity** - This will be your central connectivity hub. This is where all the Corp Application Landing Zones are peered toghter and where your Azure environment is connected to your on-premise datacenters. 
 - **Management** - Here deploy Platform Landing Zones for patch management and/or central logging. 
 - **Identity** - If there is a need for bringing Domain Conrollers to Azure they will live in a Platfrom Landing Zone here.
+
 Usually these Landing Zones are managed by a central team, but the design also allows for more granular access control to these subscriptions if needed.
 
 An Application Landing Zone Subscription is intended to host a single application. There are two flavours for Application Landing Zones, Corp and Online. A Corp Application Landing Zone is meant to be published internally through the central connectivity hub. To reduce the attack vectros we don't allow Corp Application Landing Zones to have therir own public access point, i.e. a Public IP address. The Online Application Landing Zone is something that is meant to be accessesed externally, wo here we do allow the landing zone to contain it's own public access point. However we don't allow this landing zone to be connected to the central connectivity hub. These Online Application Landing Zones will almost be their own isolated islands. 
