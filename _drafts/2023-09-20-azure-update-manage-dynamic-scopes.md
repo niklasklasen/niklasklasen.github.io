@@ -36,7 +36,7 @@ Here is what that looks like in the portal.
 ![](/assets/img/dynamicScopeFilterPortal.png)
 
 You can also use Bicep to deploy Dynamic Scopes to your Maintenance Configurations. Here is what a Bicep template for a Dynamice Scope can look:
-
+```bicep
 param parDynamicScopeName string
 param parLocation string
 param parFilterLocations array
@@ -64,3 +64,4 @@ resource resDynamicScope 'Microsoft.Maintenance/configurationAssignments@2023-04
     maintenanceConfigurationId: parMaintenanceConfigurationId
   }
 }
+```
