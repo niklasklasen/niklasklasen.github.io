@@ -6,7 +6,7 @@ categories:
 toc: true
 show_date: true
 ---
-![](/assets/img/aumIcon.svg)
+![](/assets/img/aumIcon.png)
 # Azure Update Manager is Generally Available
 It's been half a year since I wrote my first post for this blog about the product "Update Management Cetner" which was in preview back then. A couple of days ago Microsoft released the product as Generally Available under the name "Azure Update Manager", read more in the release post on Microsoft Techcommunity [Microsoft Techcommunity](https://techcommunity.microsoft.com/t5/azure-governance-and-management/generally-available-azure-update-manager/ba-p/3928878?WT.mc_id=DT-MVP-5001664). The release post mentions the new price for Azure Update Manager now when it moves into Generally Availability without going in to any more details than Azure or Azure Stack HCI hosted Virtual Machines will remain free, and Azure Arc-enabled servers will cost up to $5/month per server. So let’s shed some light on that. 
 
