@@ -21,8 +21,46 @@ If you buy Extended Security Updates (ESUs) for your Arc-enabled servers, manage
 ![](/assets/img/azureUpdateManagerOverview.png)
 
 # Dynamic Scopes
-A key resource to get the Patches installed on your servers using Azure Update Manager is the Maintenance Configuration. I have explaind more on how to create Maintenance Configurations on a previous blog post. so I wont go in to details on that. If you would like to read more on creating Mainenance Configurations read this post instead ### LINK TO OLD POST ###.
+A key resource to get the patches installed on your servers using Azure Update Manager is the Maintenance Configuration. I have explaind more on how to create Maintenance Configurations on a previous blog post. so I wont go in to details on that. If you would like to read more on creating Mainenance Configurations read this post instead ### LINK TO OLD POST ###.
 
 For automatic onboarding of servers to Mainetnance Configurations I used Azure Policies and defined what parameters I needed for specific Schedules. If an organization had multiple windows and a global presence, there could be alot of Policies to deploy. In my opinion that leads to a very clutterd compliace view when looking at your policies. Luckily there is a feature in preview called Dynamic Scopes. This replaces the need for policies to dynamicly onboard servers to a Maintenance Configuration. 
 
+The first thing you configure when seting up a new Dynamic Scope is the Subscription that is the target scope. You can select one or many subscriptions as targeted scope but you are not able to change it once the dynamic scope is created. When the scope is set you will add your filters, and the filters that you can chose from are: 
+- Resource Groups
+- Resource Types (VirtaulMachine or Azure Arc-enabled server)
+- Locations
+- OS types (Windows or Linux)
+- Tags (with an All or Any operator)
+
+Here is what that looks like in the portal.
 ![](/assets/img/dynamicScopeFilterPortal.png)
+
+You can also use Bicep to deploy Dynamic Scopes to your Maintenance Configurations. Here is what a Bicep template for a Dynamice Scope can look:
+
+param parDynamicScopeName string
+param parLocation string
+param parFilterLocations array
+param parFilterOsTypes array
+param parFilterResourceGroups array
+param parFilterResourceTypes array
+param parMaintenanceConfigurationId string
+param parFilterTagOperator string
+param parFilterTags object
+
+resource resDynamicScope 'Microsoft.Maintenance/configurationAssignments@2023-04-01' = {
+  name: parDynamicScopeName
+  location: parLocation
+  properties: {
+    filter: {
+      locations: parFilterLocations
+      osTypes: parFilterOsTypes
+      resourceGroups: parFilterResourceGroups
+      resourceTypes: parFilterResourceTypes
+      tagSettings: {
+        filterOperator: parFilterTagOperator
+        tags: parFilterTags
+      }
+    }
+    maintenanceConfigurationId: parMaintenanceConfigurationId
+  }
+}
