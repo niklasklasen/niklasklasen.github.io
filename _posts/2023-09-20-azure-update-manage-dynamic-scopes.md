@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  "Azure Update Manager goes Generally Available and Dynamic Scopes is in Preview"
+title:  "Azure Update Manager goes generally available and Dynamic Scopes is in preview"
 categories: 
   - Azure
 toc: true
