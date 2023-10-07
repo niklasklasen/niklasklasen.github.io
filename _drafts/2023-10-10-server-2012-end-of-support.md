@@ -24,6 +24,7 @@ For Azure hosted servers there's no extra steps to take, ESUs are included and y
 // Include link to MS Learn
 
 # ESU with Azure Arc
+In conclusion, there are 2 ways to ways to prepare your on-premises servers for ESUs. Either you migrate them to Azure, but if you go that path I recommend that you upgrade to a current version of Windows Server if possible, or onboard your on-premises servers to Azure Arc. In this post I will not focus on the onboarding process to Azure Arc, but if you are new to that concept you can read more here on [Microsoft Learn.](https://learn.microsoft.com/en-us/azure/azure-arc/servers/).
 
 ## Prerequisites
 
