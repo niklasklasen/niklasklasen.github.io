@@ -6,6 +6,9 @@ categories:
 toc: true
 show_date: true
 ---
+
+# IMG AI GENERATED HEADER
+
 Today the 10th of October 2023 Windows server 2012 and 1012 R2 goes "End of Support". That means that they received their last Security and Critical update today. Are you behind on your upgrade project and still have a few old servers in your data center that hasn't been upgraded yet? Then this blog post will give you some guidance on how to prolong the Security updates for another 3 years for these servers. 
 
 # Extended Security Updates
@@ -61,7 +64,13 @@ Here you need to provide the following information:
 
 Once all this is filled out, click the create button to create your license. 
 
+# IMG ESU LICENSE CREATE
+
 Next you will need to associate your Arc-enabled servers with the created ESU license. This is done at the **Eligible Resources** blade shown in the *Prerequisites* section. 
 
 ## Get updates through Azure Update Manager
-Once your Arc-enabled servers are set to receive security updates through an ESU license you can automate the patching with Azure Update Manager. 
+Once your Arc-enabled servers are set to receive security updates through an ESU license you can automate the patching with Azure Update Manager. If you already have a good patch process set up using Azure Update Manager you can onboard your Arc-enabled Windows Server 2012 and 2012 R2 servers to the Maintenance Configuration that covers Security updates.
+
+If you are setting up Azure Update Manager just to automate security updates for ESU enabled servers, I would recommend creating a Maintenance Configuration that installs Security and Critical updates and configure it to have a +1 day offset to the second Tuesday every month. Second Tuesday is as most of you know known as **Patch Tuesday** in the Microsoft world, and the +1 day offset is to factor in any potential time zone variations. We don't want to risk missing the newly released security patches and fall one month behind on them.
+
+> **_Header image prompt:_** After the 
