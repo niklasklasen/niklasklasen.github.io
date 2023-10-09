@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  "Windows Server 2012 and 2012 R2 going "End of Support" get Extended Security Updates today."
+title:  "Windows Server 2012 and 2012 R2 going 'End of Support' get Extended Security Updates today."
 categories: 
   - Azure
   - Azure Arc
