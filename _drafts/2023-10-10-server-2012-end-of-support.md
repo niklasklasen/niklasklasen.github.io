@@ -24,7 +24,7 @@ Standard can be applied to up to two virtual machines and Datacenter has no limi
 
 If you chose to license based on Physical cores the least amount that you can buy is 16 cores per license and for Virtual cores the least amount is 8 cores per license. 
 
-ESUs licenses are flexible, meaning that you can scale your license up and down as the the need to include more cores increases or decreases, and you buy them in chunks of 8 or 16 cores. There is no automation that updates the amount of cores in your license so it will be up to you to update as the need changes.
+ESUs licenses are flexible, meaning that you can scale your license up and down as the the need to include more cores increases or decreases, and you buy them in chunks of 2 or 16 cores. There is no automation that updates the amount of cores in your license so it will be up to you to update as the need changes.
 
 ## Licensing Examples 
 To help navigate the license jungle for ESUs Microsoft has illustrated a couple of potential scenarios to help you understand how the licensing model works. Below I have listed two of them, but you can find more scenarios here on [Microsoft Learn.](https://learn.microsoft.com/en-us/azure/azure-arc/servers/license-extended-security-updates#scenario-based-examples-compliant-and-cost-effective-licensing).
@@ -39,8 +39,29 @@ In this scenario, you should provision a Windows Server 2012 Datacenter license 
 In conclusion, there are 2 ways to ways to prepare your on-premises servers for ESUs. Either you migrate them to Azure, but if you go that path I recommend that you upgrade to a current version of Windows Server if possible, or onboard your on-premises servers to Azure Arc. In this post I will not focus on the onboarding process to Azure Arc, but if you are new to that concept you can read more here on [Microsoft Learn.](https://learn.microsoft.com/en-us/azure/azure-arc/servers/).
 
 ## Prerequisites
+There are some requirements to be able to use ESUs with Azure Arc. First of you need the Azure Arc agent to be on at least version 1.34, which is today the latest version released in September 2023. You are also required to attest to their conformance with SA or SPLA. Software Assurance or an equivalent Server Subscription is required for you to purchase Extended Security Updates on-premises and in hosted environments.
+
+You can examine what Arc-enabled servers you have in your environment that is eligible for ESUs from the Azure Arc blade. Navigate to **Extended Security Updates** and click on **Eligible resources** on the top left. This will list all Arc-enabled servers that are eligible for ESUs.
+
+# IMG ELIGIBLE RESOURCES
 
 ## Buying through the Azure portal
+To buy ESU licenses for your Azure Arc-enabled severs in the portal, you navigate to the Azure Arc blade and click on **Extended Security Updates** just like the previous image, but you stay on the blade **Licenses**. If you have any existing ESU licenses they will be listed here. To create a new ESU license click on the plus icon labeled **Create**, this will open up a new blade for creating ESU licenses. 
+
+Here you need to provide the following information:
+- Subscription & Resource Group
+- License Name
+- Activate License (Now or Later)
+- Region
+- SKU (Datacenter or Standard)
+- Core Type (Physical or Virtual)
+- Core Packs (in chunks of 2 or 16)
+  - Total cores is listed below
+- Check the box assuring that your Windows severs have Software Assurance.
+
+Once all this is filled out, click the create button to create your license. 
+
+Next you will need to associate your Arc-enabled servers with the created ESU license. This is done at the **Eligible Resources** blade shown in the *Prerequisites* section. 
 
 ## Get updates through Azure Update Manager
-// Security & Critical Offset to Patch Tuesday
+Once your Arc-enabled servers are set to receive security updates through an ESU license you can automate the patching with Azure Update Manager. 
