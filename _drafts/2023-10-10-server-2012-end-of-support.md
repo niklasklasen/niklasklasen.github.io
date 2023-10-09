@@ -72,3 +72,5 @@ Once your Arc-enabled servers are set to receive security updates through an ESU
 If you are setting up Azure Update Manager just to automate security updates for ESU enabled servers, I would recommend creating a Maintenance Configuration that installs Security and Critical updates and configure it to have a +1 day offset to the second Tuesday every month. Second Tuesday is as most of you know known as **Patch Tuesday** in the Microsoft world, and the +1 day offset is to factor in any potential time zone variations. We don't want to risk missing the newly released security patches and fall one month behind on them.
 
 > **_Header image prompt:_** Generate an image of a man configuring Extended Security Updates to his newly Azure Arc-enabled servers sitting in a well lit office in front of a laptop. The office gives a high-tech vibe and the man is very focused.
+
+Generate a 3D style image of servers bunched together ready to receive security updates. 
