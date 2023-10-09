@@ -6,9 +6,7 @@ categories:
 toc: true
 show_date: true
 ---
-
-# IMG AI GENERATED HEADER
-
+![](/assets/img/esuheaderimg.jpg)
 Today the 10th of October 2023 Windows server 2012 and 1012 R2 goes "End of Support". That means that they received their last Security and Critical update today. Are you behind on your upgrade project and still have a few old servers in your data center that hasn't been upgraded yet? Then this blog post will give you some guidance on how to prolong the Security updates for another 3 years for these servers. 
 
 # Extended Security Updates
@@ -46,7 +44,7 @@ There are some requirements to be able to use ESUs with Azure Arc. First of you 
 
 You can examine what Arc-enabled servers you have in your environment that is eligible for ESUs from the Azure Arc blade. Navigate to **Extended Security Updates** and click on **Eligible resources** on the top left. This will list all Arc-enabled servers that are eligible for ESUs.
 
-# IMG ELIGIBLE RESOURCES
+![](/assets/img/eligibleresources.png)
 
 ## Buying through the Azure portal
 To buy ESU licenses for your Azure Arc-enabled severs in the portal, you navigate to the Azure Arc blade and click on **Extended Security Updates** just like the previous image, but you stay on the blade **Licenses**. If you have any existing ESU licenses they will be listed here. To create a new ESU license click on the plus icon labeled **Create**, this will open up a new blade for creating ESU licenses. 
@@ -64,7 +62,7 @@ Here you need to provide the following information:
 
 Once all this is filled out, click the create button to create your license. 
 
-# IMG ESU LICENSE CREATE
+![](/assets/img/esulicenseblade.png)
 
 Next you will need to associate your Arc-enabled servers with the created ESU license. This is done at the **Eligible Resources** blade shown in the *Prerequisites* section. 
 
@@ -73,4 +71,4 @@ Once your Arc-enabled servers are set to receive security updates through an ESU
 
 If you are setting up Azure Update Manager just to automate security updates for ESU enabled servers, I would recommend creating a Maintenance Configuration that installs Security and Critical updates and configure it to have a +1 day offset to the second Tuesday every month. Second Tuesday is as most of you know known as **Patch Tuesday** in the Microsoft world, and the +1 day offset is to factor in any potential time zone variations. We don't want to risk missing the newly released security patches and fall one month behind on them.
 
-> **_Header image prompt:_** After the 
+> **_Header image prompt:_** Generate an image of a man configuring Extended Security Updates to his newly Azure Arc-enabled servers sitting in a well lit office in front of a laptop. The office gives a high-tech vibe and the man is very focused.
