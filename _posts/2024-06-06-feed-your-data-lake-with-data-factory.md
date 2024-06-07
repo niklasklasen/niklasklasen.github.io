@@ -10,7 +10,6 @@ toc: true
 show_date: true
 ---
 ![](/assets/img/DataFactory01.jpg)
-
 A while back I came across a case where there was a need to gather data from multiple sources in one place, with the purpose to create reports from that data. For me this was a new area to explore since I haven't worked that much with data stores and data collection. The selected design was to use Data Factory as the engine that collected the data from different APIs and Data Lake as the target to store collected data for the report tool to collect from. So let's have a look at the design.
 
 ## Design
