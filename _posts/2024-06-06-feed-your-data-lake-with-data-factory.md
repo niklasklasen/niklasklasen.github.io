@@ -61,7 +61,7 @@ Next step is to move to the **Author** blade where we will by creating two **Dat
 
 The first dataset is for Graph API. To start klick on the three dots behind Datasets and select *New dataset* and choose *REST* from the list. Give it a good name and then select the GraphAPI linked service that we just created from the dropdown menu. We need to do some more configurations on the GraphAPI dataset, so select it in the list and go to the *parameters* tab. Add a parameter with: 
 * **Name** endpoint
-* **Type** string*
+* **Type** string
 
 Leave **Default value** blank. Go back to the Connection blade and add the **Relative URL**: @dataset().endpoint.
 
