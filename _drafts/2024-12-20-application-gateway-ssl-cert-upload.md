@@ -16,3 +16,5 @@ If we try to browse certificates in the Azure Key Vault when we have RBAC config
 It tells us that we can't access the Azure Key Vault because it's using the RBAC permission model. But that is just through the portal, we can still reach our goal by using Powershell to upload the stored certificate to the Application Gateway as a Listener SSL certificate. 
 
 Solution
+
+Test
