@@ -15,6 +15,25 @@ If we try to browse certificates in the Azure Key Vault when we have RBAC config
 
 It tells us that we can't access the Azure Key Vault because it's using the RBAC permission model. But that is just through the portal, we can still reach our goal by using Powershell to upload the stored certificate to the Application Gateway as a Listener SSL certificate. 
 
-Solution
+## Solution with PowerShell
+First you need to upload the certificate you intend to use in the Application Gateway to the Azure Key Vault.
 
-Test
+###IMAGE OF CERT IN AZURE KEY VAULT###
+
+To upload this certificate as a listerner ssl certificate in the Application Gateway you can run the PowerShell commands below. 
+
+```powershell
+Connect-AzAccount -AuthScope AzureKeyVaultServiceEndpointResourceId
+$appgw = Get-AzApplicationGateway -Name <APPLICATION GATEWAY NAME> -ResourceGroupName <RESOURCE GROUP NAME>
+Set-AzApplicationGatewayIdentity -ApplicationGateway $appgw -UserAssignedIdentityId <MANAGED IDENTITY RESOURCE ID>
+$secret = Get-AzKeyVaultSecret -VaultName <KEY VAULT NAME> -Name <CERTIFICATE NAME>
+$secretId = $secret.Id.Replace($secret.Version, "")
+Add-AzApplicationGatewaySslCertificate -KeyVaultSecretId $secretId -ApplicationGateway $appgw -Name $secret.Name
+Set-AzApplicationGateway -ApplicationGateway $appgw
+```
+Start with connecting to Azure using the AuthScope AzureKeyVaultServiceEndpointResourceId so that the managed identity can be used. Then we will then specify the the Application Gateway that we want the certificate to be uploaded to. Specify the managed identity that is associated to the Application Gateway and has access to read the certificates in the Azure Key Vault. 
+Then we need to get the secret ID, and to do that we need to specify the Key Vault and certificate names.
+When creating the variable for $secretID we can remove the secret version from the command to use the latest version. 
+Then we need to add the certificate to the Application Gateway before finally committing the changes to the Application Gateway.
+
+###IMAGE OF CERT IN LISTENER SLL CERT VIEW###
