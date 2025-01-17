@@ -1,11 +1,12 @@
 ---
 layout: single
-title:  "Draft Post"
+title:  "Add certificates to Application Gateway with PowerShell"
 categories: 
   - Azure
 toc: true
 show_date: true
 ---
+![](/assets/img/waf-ssl-cert-title-img.png)
 ## Problem in the Azure portal
 If you are publishing your applications publicly, you are probably protecting them with a Web Application Firewall (WAF). In most cases I deploy an Application Gateway and attache a Web Application Firewall Policy to it to protect the applications that I want to publish to the internet.
 When you want to reach your application over HTTPS you need to upload a TLS certificate to encrypt your traffic. This is then used in the Listener within the Application Gateway. These certificates can be stored in an Azure Key Vault so that they can be reached either from the portal or programmatically.
