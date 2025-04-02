@@ -1,8 +1,9 @@
 ---
 layout: single
-title:  "Draft Post"
+title:  "Structure Your Azure Firewall Policy Rules"
 categories: 
   - Azure
+  - Azure Firewall
 toc: false
 show_date: true
 ---
