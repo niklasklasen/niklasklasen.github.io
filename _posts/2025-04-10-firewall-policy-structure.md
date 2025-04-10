@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  "Structure Your Azure Firewall Policy Rules"
+title:  "Structure your Azure Firewall Policy rules"
 categories: 
   - Azure
   - Azure Firewall
