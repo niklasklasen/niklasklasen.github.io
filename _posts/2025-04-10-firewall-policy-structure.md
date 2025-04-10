@@ -57,4 +57,4 @@ Within those types it will process them based on priority.
 1. Rule collection group priority
 2. Rule collection priority within the rule collection group
 
-If the Azure Firewall denies all traffic that it can't find a rule that allows it. Azure Firewall is explicit deny.
+The Azure Firewall denies all traffic that it can't find a rule that allows it. Azure Firewall is explicit deny.
