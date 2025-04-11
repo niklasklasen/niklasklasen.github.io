@@ -30,7 +30,7 @@ In addition to these default rule collection groups I create one for each depart
 ![](/assets/img/rule-collection-group-structure.png)
 
 # Rule Collection
-This is the second level in the structural hierarchy within Azure Firewall Policies, and these are grouped into Rule Collection Groups. Rule Collections are defined to be either for Network Rules or Application Rules, and you specify if the rules in the Rule Collection is Allow or Deny rules. I tend to avoid using Allow rules since Azure Firewall is explicit deny, meaning if no particular rule is created to allow the traffic through it is denied by default. 
+This is the second level in the structural hierarchy within Azure Firewall Policies, and these are grouped into Rule Collection Groups. Rule Collections are defined to be either for Network Rules or Application Rules, and you specify if the rules in the Rule Collection is Allow or Deny rules. I tend to avoid using Deny rules since Azure Firewall is explicit deny, meaning if no particular rule is created to allow the traffic through it is denied by default. 
 
 >**NOTE:** If you want to make sure that specific IP addresses or ranges aren't allowed you could add specific deny rules for these, just make sure that they are in a Rule Collection Group with a low priority number. This will make them the first rules that your firewall evaluates and if they trigger the traffic won't be evaluated by any other rules in the Azure Firewall Policy. The purpose of this is to make sure that these IP addresses will be blocked even if they are included in an allowed range by another rule with a higher priority number.
 
