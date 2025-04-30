@@ -23,5 +23,21 @@ We still want to make sure that each Online application remains in its "bubble",
 
 But if we are to use shared services in this way for our Online archetype we need to implement some sort of IPAM solution to avoid IP conflicts. For example, if the Online Application 1 vnet and the Online Application 2 vnet overlaps, the WAF won't know in which network the desired backend resource is. I would recommend the native Azure IPAM solution that is built in to Azure Virtual Network Manager (AVNM), but it's still in Public Preview so be cautious when deploying it for a production environment.
 
+Note that you might need to deploy multiple WAFs for your online applications since you want them to be close to the resource in Azure and your applications user.
+
 #  Concept 2: Connect Online Applications the Corp Shared Platform Landing Zones
 ![](/assets/diagrams/solution2-online-to-corp-shared.drawio.svg)
+
+For the second concept we utilize a WAF that is connected to the connectivity hub to publish our Online applications. Usually this WAF is dedicated to Corp applications but I want to challenge that in this concept. You will still get separation between Online and Corp applications in this scenario since the traffic can't traverse from an Online applications virtual network, through the WAF virtual network and on to the Corp applications. You get the same upsides as you do with the first concept with the addition that you will also save som mony since only one WAF is needed to serve both archetypes and your network team only needs to manage one WAF.
+
+But what are the downsides? Even if the traffic from the Online applications can't reach the connectivity hub, the WAFs virtual network is peered with it, so there can be no overlapping IP addresses in Corp and Online. So your Online applications needs to be handled in the same IP plan as your Corp applications. Usually there is a connection between Azure and you on-premises environment, meaning that those too needs to be in the same IP plan. That can lead to IP exhaustion. 
+
+Since the Online applications and the Corp applications share the same WAF they will have to abide to the same security standard. That sure sounds like a good thing, but if you have different requirements to the different archetypes that will cause an issue. 
+
+# Conclusions
+For bigger companies where IP exhaustion is a real risk, the first concept the best for running shared Platform Landing Zones for Online applications. It will increase the cost and management.
+And for the second concept it is the other way around. I will be better suited for smaller companies where IP exhaustion is not an issue but cost and management capacity is. 
+Keep in mind that in neither of these concepts the online applications traffic is filtered through a firewall. 
+
+# Reflection
+For security reasons I personally prefer that you try to run as much as possible through private networks in Azure. That might limit the need for solutions like this. But reality is that not all applications can be restricted to re rules that applies to Corp applications and there for needs to be classified as an Online applications. The goal with these to concepts are to make the Online applications as secure as possible.
