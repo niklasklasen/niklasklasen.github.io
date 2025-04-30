@@ -12,4 +12,16 @@ There are many reasons for why an applications needs to be in the Online archety
 
 But being in the Online section of the Azure environment means that you can't take advantage of centrally managed shared services that are reached via the hub. One of them could be a centrally managed Web Application Firewall (WAF), and that will be the example in this post. The WAF can be complex to manage and needs configuration to make sure that its protecting the published applications. The WAF also comes with a cost. If we let the teams in the Online archetype managed this completely by them self we might end up with WAFs that are misconfigured and doesn't provide the protection that we want, or that teams publish the service directly to internet, relying only on the services level firewall on the PaaS service itself. 
 
-# Solution 1: Shared Platform Landing Zones for Online
+# Concept 1: Shared Platform Landing Zones for Online
+![](/assets/diagrams/solution1-online-shared.drawio.svg)
+
+In this concept we have deployed a WAF that will only serve applications that are in the Online archetype. This WAF will still be managed by the same team or individuals that are responsible for the WAF that is attached to the central connectivity hub. This means that we will have control over the configurations in the WAF that are used by applications in in the Online archetype. So we can ensure that they follow the desired rules and have control how the applications are exposed to the internet and how the communication between WAF and applications is configured. 
+
+Having a shared WAF for the Online archetype also means that we don't need to point our external DNS to various services that are deployed by the application teams, but instead only to our shared WAFs public endpoint. We will also be able to centralize the management of certificates.
+
+We still want to make sure that each Online application remains in its "bubble", so that in the case of a breach there are no direct communication between the applications over the private network. This is still achieved in this concept since traffic won't traverse over vnet peerings to other applications virtual networks. 
+
+But if we are to use shared services in this way for our Online archetype we need to implement some sort of IPAM solution to avoid IP conflicts. For example, if the Online Application 1 vnet and the Online Application 2 vnet overlaps, the WAF won't know in which network the desired backend resource is. I would recommend the native Azure IPAM solution that is built in to Azure Virtual Network Manager (AVNM), but it's still in Public Preview so be cautious when deploying it for a production environment.
+
+#  Concept 2: Connect Online Applications the Corp Shared Platform Landing Zones
+![](/assets/diagrams/solution2-online-to-corp-shared.drawio.svg)
