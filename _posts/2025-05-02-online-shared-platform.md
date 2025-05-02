@@ -1,11 +1,12 @@
 ---
 layout: single
-title:  "Draft Post"
+title:  "Concept: Shared platform services for Online archetype applications"
 categories: 
   - Azure
 toc: true
 show_date: true
 ---
+![](/assets/img/shared-services-online.png)
 Many environments in Azure follows the Enterprise Scale Landing Zones design where you have Platform Landing Zones that are shared through the Azure environment, and dividing the Application Landing Zones into Corp and Online. Corp applications are bound to utilizing private networks in Azure takes advantage of a hub to communicate between each other and to external services (i.e. on-premises or Internet). Online on the other hand are treated more like bubbles where application owners has a bigger responsibility to secure external traffic, and we minimize the blast radius if they are exposed by not letting them be connected to each other with virtual network peering. 
 
 There are many reasons for why an applications needs to be in the Online archetype. One reason is cost, some PaaS services requires a higher SKU to be able to integrate them in a private network. Another reason I hear is that "private networking in Azure is hard". The last reason can be mitigate by elevating the team or bring in external competence in designing the solution, but the cost aspect might not be possible to mitigate and therefore the Online archetype is the right one for that solution. 
