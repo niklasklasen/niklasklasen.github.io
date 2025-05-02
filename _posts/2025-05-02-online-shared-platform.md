@@ -41,4 +41,4 @@ And for the second concept it is the other way around. I will be better suited f
 Keep in mind that in neither of these concepts the online applications traffic is filtered through a firewall. 
 
 # Reflection
-For security reasons I personally prefer that you try to run as much as possible through private networks in Azure. That might limit the need for solutions like this. But reality is that not all applications can be restricted to re rules that applies to Corp applications and there for needs to be classified as an Online applications. The goal with these to concepts are to make the Online applications as secure as possible.
+For security reasons I personally prefer that you try to run as much as possible through private networks in Azure. That might limit the need for solutions like this. But reality is that not all applications can be restricted to the rules that applies to Corp applications and there for needs to be classified as an Online applications. The goal with these to concepts are to make the Online applications as secure as possible.
