@@ -40,6 +40,17 @@ By chaning the parent id for the static member, terrafrom destroys the existing 
 
 ### Bicep
 
+## Test 3 - Remove the virtual network from a network group
+In this test I will simply remove the static member resource from the template and the expectation is that the network group loses the member.
+### Terraform
+With Terraform just removing the reference to the static member removes the member virtual network from the network group 
+
+###### INSERT IMAGE #######
+
+### Bicep 
+
+# Conclusion 
+
 ## Test 1 tempaltes
 ### Terraform (code block)
 terraform {
