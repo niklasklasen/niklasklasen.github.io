@@ -36,7 +36,7 @@ Running this test in Terraform was no problem. AVNM and the network groups was c
 By changing the parent for the virtual network "vnet-2" to point at the network group 1, this should move the virtual network from network group 2 to network group 1.
 ### Terraform
 By chaning the parent id for the static member, terrafrom destroys the existing static member resource and recreates it under the new parent. The result is that the vnet is moved to the other network group. 
-###### INSERT IMAGE ######
+![](/assets/img/tf-2vnet-1networkgroup.png)
 
 ### Bicep
 
@@ -44,8 +44,7 @@ By chaning the parent id for the static member, terrafrom destroys the existing 
 In this test I will simply remove the static member resource from the template and the expectation is that the network group loses the member.
 ### Terraform
 With Terraform just removing the reference to the static member removes the member virtual network from the network group 
-
-###### INSERT IMAGE #######
+![](/assets/img/tf-1vnet-1networkgroup.png)
 
 ### Bicep 
 
