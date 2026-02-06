@@ -6,6 +6,7 @@ categories:
 toc: false
 show_date: true
 ---
+![](/assets/img/avnm-with-code-header.png)
 Infrastructure as code (IaC) not a new concept in the world of IT, but the usage differse from bussines. In the last years I have helped a customers to deploy new infrastructure with the help of IaC templates and my prefered flavour has been Bicep in these project. Both due to personal preferences and customer requirements. 
 Deploying new environments with IaC templates is allways good for multiple reasons, i.e. you get a baseline for your environment that is redeployable and you can say that it's some what documented as well since all the infromation you need is there in the templates. But what happens after the deployment, when the new infrasturctire meets the reality? 
 When the configuration of the infrastructure need to change to meet new requirments from the business it is easy to open up the Azure portal and kick on a few buttons or write a quick PowerShell scritp to meet these requirments, but then reality starts to drift from the template. This means that we no longer can use the template to redeploy the environment in a disaster recovery case or lean on it as documentation any more. To avoid this we can instead do all the configurations that the environment needs in the template instead and just keep deploying that with the new changes. Sounds simple, right? 
@@ -36,6 +37,7 @@ Running this test in Terraform was no problem. AVNM and the network groups was c
 By changing the parent for the virtual network "vnet-2" to point at the network group 1, this should move the virtual network from network group 2 to network group 1.
 ### Terraform
 By chaning the parent id for the static member, terrafrom destroys the existing static member resource and recreates it under the new parent. The result is that the vnet is moved to the other network group. 
+
 ![](/assets/img/tf-2vnet-1networkgroup.png)
 
 ### Bicep
@@ -43,7 +45,8 @@ By chaning the parent id for the static member, terrafrom destroys the existing 
 ## Test 3 - Remove the virtual network from a network group
 In this test I will simply remove the static member resource from the template and the expectation is that the network group loses the member.
 ### Terraform
-With Terraform just removing the reference to the static member removes the member virtual network from the network group 
+With Terraform just removing the reference to the static member removes the member virtual network from the network group.
+
 ![](/assets/img/tf-1vnet-1networkgroup.png)
 
 ### Bicep 
@@ -52,6 +55,7 @@ With Terraform just removing the reference to the static member removes the memb
 
 ## Test 1 tempaltes
 ### Terraform (code block)
+```json
 terraform {
   required_providers {
     azurerm = {
@@ -168,4 +172,5 @@ resource "azapi_resource" "staticMember-2" {
   schema_validation_enabled = false
   response_export_values    = ["*"]
 }
+```
 ### Bicep (code block)
