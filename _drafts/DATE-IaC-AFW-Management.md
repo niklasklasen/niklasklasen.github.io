@@ -59,10 +59,21 @@ With Terraform just removing the reference to the static member removes the memb
 ![](/assets/img/tf-1vnet-1networkgroup.png)
 
 ### Bicep 
+By removing the reference to the static memeber 2 in the template, the goal was to remove it from the network groups all togheter and just keep the static member 1 in network group 1. But since there is no state keept in bicep, just removing the reference from the template results in Bicep ignoring that resource. The environment stays the same as after test 2.
+
+![](/assets/img/bicep-2vnet-1networkgroup.png)
 
 # Conclusion 
+The purpose for this test was to figure out what IaC language would be best suited not for just building a core network in Azure, but to also manage ther operations for that core network purely with the IaC template. The goal is that the core network only can be manipulated through these templates and not by human interactrions through the Azure portal or AzureCLI. 
 
-## Test 1 tempaltes
+Bicep is in my oppingion a simpler language to use, and if your goal is just to deploy new infrastructure through templates it's easy. You write a template and what you have in that template is what will be added to the environment. 
+
+With Terraform you get the benifit (and hassle) of a state file, you need to need to manage that with care. The state file is the source of truth from your Terraform template of what your environment looks like. The state updates with your template, and if there's any difference between the state and the acctual environment the environment will adapt to the state in the state file.
+
+For my purpose of managing the core network olny from the template, Terraform is the prefered choise. I also get the benifit of Terraform reverts any changed done in the portal if I redeploy my template. From a security perspective that means that I in theroy can run a pipeline every night that deploys the Terraform template. If there's no changes in either the template or the environment, nothing will happen. But if someone has done unexpected changes in the environment, Terraform will roll it back to my expated state that is reffernced in the state file. 
+
+
+## Appendix - Test 1 tempaltes
 ### Terraform
 ```json
 terraform {
@@ -183,7 +194,7 @@ resource "azapi_resource" "staticMember-2" {
 }
 ```
 ### Bicep
-```json
+```powershell
 targetScope = 'resourceGroup'
 
 param subid string = '/subscriptions/2e63d2be-c58f-4c17-b08d-967891a03825'
