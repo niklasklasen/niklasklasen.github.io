@@ -23,15 +23,21 @@ In reailty the entire core network in Azure will be effected by this, but to tes
 
 ### IMAGE OF TEST SETUP ###
 
-## In a box ## 
-The template for the first test can be found on the bottom of this post if you want to try this yourself.
-DISCLAIMER: These template doesn't follow any good template structure. The only serve the purpose to conduct these tests.
+> The template for the first test can be found on the bottom of this post if you want to try this yourself.
+
+> DISCLAIMER: These template doesn't follow any good template structure. They only serve the purpose to conduct these tests.
 
 ## Test 1 - creating AVNM and adding virtual networks to network groups
 For this first step I created the AVNM using an IaC template and created the two network groups. The template will then add the two existing virtual networks to the network groups, one for each network group. 
 ### Terrafrom
 Running this test in Terraform was no problem. AVNM and the network groups was created and one virtual network was added to each of the groups. As expected.
+
+![](/assets/img/tf-2vnet-2networkgroup.png)
+
 ### Bicep
+Same as for Terrafrom ther were no issused to create an AVNM with two network groups and add extisting virtual networks to them. 
+
+![](/assets/img/bicep-2vnet-2networkgroup.png)
 
 ## Test 2 - Move one virtual network from one network group to the other.
 By changing the parent for the virtual network "vnet-2" to point at the network group 1, this should move the virtual network from network group 2 to network group 1.
@@ -54,7 +60,7 @@ With Terraform just removing the reference to the static member removes the memb
 # Conclusion 
 
 ## Test 1 tempaltes
-### Terraform (code block)
+### Terraform
 ```json
 terraform {
   required_providers {
@@ -173,4 +179,61 @@ resource "azapi_resource" "staticMember-2" {
   response_export_values    = ["*"]
 }
 ```
-### Bicep (code block)
+### Bicep
+```json
+targetScope = 'resourceGroup'
+
+param subid string = '/subscriptions/2e63d2be-c58f-4c17-b08d-967891a03825'
+param vnet1id string = '/subscriptions/2e63d2be-c58f-4c17-b08d-967891a03825/resourceGroups/rg-vnets/providers/Microsoft.Network/virtualNetworks/vnet-1'
+param vnet2id string = '/subscriptions/2e63d2be-c58f-4c17-b08d-967891a03825/resourceGroups/rg-vnets/providers/Microsoft.Network/virtualNetworks/vnet-2'
+
+resource resavnm 'Microsoft.Network/networkManagers@2025-05-01' = {
+  location: resourceGroup().location
+  name: 'avnm-demo'
+  properties: {
+    description: 'Bicep created Azure Virtual Network Manager'
+    networkManagerScopeAccesses: [
+      'Connectivity'
+    ]
+    networkManagerScopes: {
+      subscriptions: [
+        subid
+      ]
+    }
+  }
+}
+
+resource networkgroup1 'Microsoft.Network/networkManagers/networkGroups@2025-05-01' = {
+  parent: resavnm
+  name: 'network-group-1'
+  properties: {
+    description: 'Network Group 1'
+    memberType: 'VirtualNetwork'
+  }
+}
+
+resource networkgroup2 'Microsoft.Network/networkManagers/networkGroups@2025-05-01' = {
+  parent: resavnm
+  name: 'network-group-2'
+  properties: {
+    description: 'Network Group 2'
+    memberType: 'VirtualNetwork'
+  }
+}
+
+resource staticMember1 'Microsoft.Network/networkManagers/networkGroups/staticMembers@2025-05-01' = {
+  parent: networkgroup1
+  name: 'static-member-vnet-1'
+  properties: {
+    resourceId: vnet1id
+  }
+}
+
+resource staticMember2 'Microsoft.Network/networkManagers/networkGroups/staticMembers@2025-05-01' = {
+  parent: networkgroup2
+  name: 'static-member-vnet-2'
+  properties: {
+    resourceId: vnet2id
+  }
+}
+```
