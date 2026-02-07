@@ -3,6 +3,9 @@ layout: single
 title: "Bicep or Terraform for Azure network management"
 categories: 
   - Azure
+  - Network
+  - Terraform
+  - Bicep
 toc: true
 show_date: true
 ---

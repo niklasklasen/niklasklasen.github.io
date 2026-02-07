@@ -6,4 +6,8 @@ categories:
 toc: false
 show_date: true
 ---
-TEXT
+Summary of product
+
+Network Hub Light - Cost saving
+
+Mini regional hub design, mitigate 400 vnet peering limit.
