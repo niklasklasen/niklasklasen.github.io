@@ -35,7 +35,7 @@ Running this test in Terraform was no problem. AVNM and the network groups was c
 ![](/assets/img/tf-2vnet-2networkgroup.png)
 
 ### Bicep
-Same as for Terrafrom ther were no issused to create an AVNM with two network groups and add extisting virtual networks to them. 
+Same as for Terrafrom ther were no issuse to create an AVNM with two network groups and add extisting virtual networks to them. 
 
 ![](/assets/img/bicep-2vnet-2networkgroup.png)
 
@@ -47,6 +47,9 @@ By chaning the parent id for the static member, terrafrom destroys the existing 
 ![](/assets/img/tf-2vnet-1networkgroup.png)
 
 ### Bicep
+By just changing the parent for the static member resource that is referencing "vnet-2", Bicep doesn't move that memeber. It creates a new static member in the new network group, resulting in network group 1 now has two members and one is still left in network group 2. This now means that the reality is drifting from the template.
+
+![](/assets/img/bicep-2vnet-1networkgroup.png)
 
 ## Test 3 - Remove the virtual network from a network group
 In this test I will simply remove the static member resource from the template and the expectation is that the network group loses the member.
