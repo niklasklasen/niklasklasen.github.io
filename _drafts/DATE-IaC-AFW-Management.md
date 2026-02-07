@@ -3,7 +3,7 @@ layout: single
 title: "Bicep or Terraform for Azure network management"
 categories: 
   - Azure
-toc: false
+toc: true
 show_date: true
 ---
 ![](/assets/img/avnm-with-code-header.png)
