@@ -7,19 +7,19 @@ toc: true
 show_date: true
 ---
 ![](/assets/img/avnm-with-code-header.png)
-Infrastructure as code (IaC) not a new concept in the world of IT, but the usage differse from bussines. In the last years I have helped a customers to deploy new infrastructure with the help of IaC templates and my prefered flavour has been Bicep in these project. Both due to personal preferences and customer requirements. 
-Deploying new environments with IaC templates is allways good for multiple reasons, i.e. you get a baseline for your environment that is redeployable and you can say that it's some what documented as well since all the infromation you need is there in the templates. But what happens after the deployment, when the new infrasturctire meets the reality? 
-When the configuration of the infrastructure need to change to meet new requirments from the business it is easy to open up the Azure portal and kick on a few buttons or write a quick PowerShell scritp to meet these requirments, but then reality starts to drift from the template. This means that we no longer can use the template to redeploy the environment in a disaster recovery case or lean on it as documentation any more. To avoid this we can instead do all the configurations that the environment needs in the template instead and just keep deploying that with the new changes. Sounds simple, right? 
+Infrastructure as code (IaC) not a new concept in the world of IT, but the usage differs from business. In the last years I have helped a customers to deploy new infrastructure with the help of IaC templates and my preferred flavour has been Bicep in these project. Both due to personal preferences and customer requirements. 
+Deploying new environments with IaC templates is always good for multiple reasons, i.e. you get a baseline for your environment that is re-deployable and you can say that it's some what documented as well since all the information you need is there in the templates. But what happens after the deployment, when the new infrastructure meets the reality? 
+When the configuration of the infrastructure need to change to meet new requirements from the business it is easy to open up the Azure portal and kick on a few buttons or write a quick PowerShell script to meet these requirements, but then reality starts to drift from the template. This means that we no longer can use the template to redeploy the environment in a disaster recovery case or lean on it as documentation any more. To avoid this we can instead do all the configurations that the environment needs in the template instead and just keep deploying that with the new changes. Sounds simple, right? 
 
-The reailty is that to reach the point where you can manage your infrastructure completley with code, your organisation needs to reach a certain level of maturity and you need the right skills in your infrastructure teams. To end this rant, I have now found a project where the end goal is that there's now human access in the the critcal areas of the infrastructure, and all deployments and configurations are made using pipelince and IaC templates. Yay! 
+The reality is that to reach the point where you can manage your infrastructure completely with code, your organization needs to reach a certain level of maturity and you need the right skills in your infrastructure teams. To end this rant, I have now found a project where the end goal is that there's now human access in the the critical areas of the infrastructure, and all deployments and configurations are made using pipeline and IaC templates. Yay! 
 
 But this raised a question for me. When it comes to both deploy a new network infrastructure and manage it, can I still stick to Bicep or is Terraform better in this scenario? This is what i will try to figure out in this blog post. 
 
 # The test
-In reailty the entire core network in Azure will be effected by this, but to test the IaC language I'll keep it simple. I'll be using Azure Virtual Network Manager (AVNM) as the base resource here, and within that I'll create 2 network groups. Outside of the template I'll create 2 virtual networks and the the test will then be to:
+In reality the entire core network in Azure will be effected by this, but to test the IaC language I'll keep it simple. I'll be using Azure Virtual Network Manager (AVNM) as the base resource here, and within that I'll create 2 network groups. Outside of the template I'll create 2 virtual networks and the the test will then be to:
 - Add one virtual network in each of the network groups
 - Move one virtual network form one network group to the other
-- Remove one virtual network completley from the network groups
+- Remove one virtual network completely from the network groups
 
 ### IMAGE OF TEST SETUP ###
 
@@ -29,25 +29,25 @@ In reailty the entire core network in Azure will be effected by this, but to tes
 
 ## Test 1 - creating AVNM and adding virtual networks to network groups
 For this first step I created the AVNM using an IaC template and created the two network groups. The template will then add the two existing virtual networks to the network groups, one for each network group. 
-### Terrafrom
+### Terraform
 Running this test in Terraform was no problem. AVNM and the network groups was created and one virtual network was added to each of the groups. As expected.
 
 ![](/assets/img/tf-2vnet-2networkgroup.png)
 
 ### Bicep
-Same as for Terrafrom ther were no issuse to create an AVNM with two network groups and add extisting virtual networks to them. 
+Same as for Terraform ther were no issues to create an AVNM with two network groups and add existing virtual networks to them. 
 
 ![](/assets/img/bicep-2vnet-2networkgroup.png)
 
 ## Test 2 - Move one virtual network from one network group to the other.
 By changing the parent for the virtual network "vnet-2" to point at the network group 1, this should move the virtual network from network group 2 to network group 1.
 ### Terraform
-By chaning the parent id for the static member, terrafrom destroys the existing static member resource and recreates it under the new parent. The result is that the vnet is moved to the other network group. 
+By changing the parent id for the static member, terraform destroys the existing static member resource and recreates it under the new parent. The result is that the vnet is moved to the other network group. 
 
 ![](/assets/img/tf-2vnet-1networkgroup.png)
 
 ### Bicep
-By just changing the parent for the static member resource that is referencing "vnet-2", Bicep doesn't move that memeber. It creates a new static member in the new network group, resulting in network group 1 now has two members and one is still left in network group 2. This now means that the reality is drifting from the template.
+By just changing the parent for the static member resource that is referencing "vnet-2", Bicep doesn't move that member. It creates a new static member in the new network group, resulting in network group 1 now has two members and one is still left in network group 2. This now means that the reality is drifting from the template.
 
 ![](/assets/img/bicep-2vnet-1networkgroup.png)
 
@@ -59,21 +59,21 @@ With Terraform just removing the reference to the static member removes the memb
 ![](/assets/img/tf-1vnet-1networkgroup.png)
 
 ### Bicep 
-By removing the reference to the static memeber 2 in the template, the goal was to remove it from the network groups all togheter and just keep the static member 1 in network group 1. But since there is no state keept in bicep, just removing the reference from the template results in Bicep ignoring that resource. The environment stays the same as after test 2.
+By removing the reference to the static member 2 in the template, the goal was to remove it from the network groups all together and just keep the static member 1 in network group 1. But since there is no state kept in bicep, just removing the reference from the template results in Bicep ignoring that resource. The environment stays the same as after test 2.
 
 ![](/assets/img/bicep-2vnet-1networkgroup.png)
 
 # Conclusion 
-The purpose for this test was to figure out what IaC language would be best suited not for just building a core network in Azure, but to also manage ther operations for that core network purely with the IaC template. The goal is that the core network only can be manipulated through these templates and not by human interactrions through the Azure portal or AzureCLI. 
+The purpose for this test was to figure out what IaC language would be best suited not for just building a core network in Azure, but to also manage their operations for that core network purely with the IaC template. The goal is that the core network only can be manipulated through these templates and not by human interactions through the Azure portal or AzureCLI. 
 
-Bicep is in my oppingion a simpler language to use, and if your goal is just to deploy new infrastructure through templates it's easy. You write a template and what you have in that template is what will be added to the environment. 
+Bicep is in my opinion a simpler language to use, and if your goal is just to deploy new infrastructure through templates it's easy. You write a template and what you have in that template is what will be added to the environment. 
 
-With Terraform you get the benifit (and hassle) of a state file, you need to need to manage that with care. The state file is the source of truth from your Terraform template of what your environment looks like. The state updates with your template, and if there's any difference between the state and the acctual environment the environment will adapt to the state in the state file.
+With Terraform you get the benefit (and hassle) of a state file, you need to need to manage that with care. The state file is the source of truth from your Terraform template of what your environment looks like. The state updates with your template, and if there's any difference between the state and the actual environment the environment will adapt to the state in the state file.
 
-For my purpose of managing the core network olny from the template, Terraform is the prefered choise. I also get the benifit of Terraform reverts any changed done in the portal if I redeploy my template. From a security perspective that means that I in theroy can run a pipeline every night that deploys the Terraform template. If there's no changes in either the template or the environment, nothing will happen. But if someone has done unexpected changes in the environment, Terraform will roll it back to my expated state that is reffernced in the state file. 
+For my purpose of managing the core network only from the template, Terraform is the preferred choice. I also get the benefit of Terraform reverts any changed done in the portal if I redeploy my template. From a security perspective that means that I in theory can run a pipeline every night that deploys the Terraform template. If there's no changes in either the template or the environment, nothing will happen. But if someone has done unexpected changes in the environment, Terraform will roll it back to my expected state that is referenced in the state file. 
 
 
-## Appendix - Test 1 tempaltes
+## Appendix - Test 1 templates
 ### Terraform
 ```json
 terraform {
