@@ -79,3 +79,6 @@ All connectivity patterns are configured and managed centrally through Azure Vir
 - Less control of traffic moving between applications.
 - Virtual Network Routing Appliance is in public preview and needs to be generally available before use in production.
 
+## Conclusions
+Based on the your security an performance need this design with the help of Azure Virtual Network Routing Appliance allows you to tweak the patterns of connectivity in multiple ways. Either to increase performance or security. 
+This is a concept design, but the idea is to use the Azure Virtual Network Routing Appliance to reduce cost by limiting the data processed by the central firewalls or the amount of peerings that is needed within Azure. Whether this is an option or not will be determined once Azure Virtual Network Routing Appliance goes general available and we can test the actual performance and see the pricing details on this service. 
