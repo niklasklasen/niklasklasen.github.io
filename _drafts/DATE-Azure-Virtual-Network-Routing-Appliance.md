@@ -1,12 +1,18 @@
 ---
 layout: single
-title:  "Azure Virtual Network Routing Appliance - Scalable designs
+title:  Scaling with Azure Virtual Network Routing Appliance
 categories: 
   - Azure
 toc: true
 show_date: true
 ---
-## Traditional Regional Hubs - design concept
+![](/assets/img/avnra-banner.png)
+
+Earlier in February Microsoft announced the public preview of the service and there has been a few posts on how to deploy and configure it, so I won't cover that in this post. But if you want to look at the details of Azure Virtual Network Routing Appliance you can read the documentation on Microsoft learn, [Azure Virtual Network Routing Appliance Documentation](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-routing-appliance-overview). In this post I will instead focus on the a scalability issue that I'm facing, where I run in to limits from the Azure platform and massive costs if I scale out with the current network design. 
+
+Using a more lightweight product in the hub can reduce coast and increase the speed, but with reduced control. In the following sections I will outline how hub-and-spoke is built today and how it can be modified with the use of Azure Virtual Network Routing Appliance.
+
+## Traditional Regional Hubs
 ![](/assets/img/VNRA-Traditional.png)
 ### Regional Hubs
 This concept features regional hubs, deployed per Azure region, that are capable of inspecting and filtering traffic that moves between spokes and across regions within the Azure tenant. They also provide connection to the Multi-cloud connectivity service and internet egress and ingress. The regional hubs are connected in a mesh pattern to allow applications to take the shortest path to each of the region that are used. The regional hubs contains the following services: 
@@ -14,7 +20,7 @@ This concept features regional hubs, deployed per Azure region, that are capable
 - Azure Firewall
 - Virtual Network Gateway
 - External application delivery solution
-- Internal Application Delivery solution (Application Gateway + WAF Policy)
+- Internal Application Delivery solution
 - DNS Private Resolver
 
 Regional hubs can also support direct connectivity to other cloud provides, for example FastConnect to OCI where there is hubs in the same supported regions.
@@ -38,7 +44,7 @@ All connectivity patterns are configured and managed centrally through Azure Vir
 - Limit of 400 spokes per regional hub, because of GatewaySubnet route table in each hub is limited to 400 routes. 
 - More load on the firewalls since all traffic moves through the hub as a standard. Will increase cost and latency.
 
-## Geographical Hubs - design concept
+## Geographical Hubs - With Azure Virtual Network Routing Appliance in regional hubs
 ![](/assets/img/VNRA-VNRA.png)
 ### Geographical Hubs
 This concept features geographical hubs, deployed per geographical area, that are capable of inspecting and filter traffic that moves between geographies or regions based on the requirements. These geographical hubs will also provide application delivery (internal and external), connection to the multi-cloud connectivity solution and act as an internet breakout for Azure applications. 
@@ -49,7 +55,7 @@ The geographical hubs contains the following services:
 - Azure Firewall
 - Virtual Network Gateway
 - External application delivery solution
-- Internal Application Delivery solution (Application Gateway + WAF Policy)
+- Internal Application Delivery solution
 - DNS Private Resolver
 
 Geographical hubs can also support direct connectivity to other cloud provides, for example FastConnect to OCI where we have hubs in the same supported regions. What hub that provides this functionality is based on the security requirements. 
