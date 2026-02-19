@@ -7,7 +7,6 @@ toc: true
 show_date: true
 ---
 ![](/assets/img/avnra-banner.png)
-
 Earlier in February Microsoft announced the public preview of the service and there has been a few posts on how to deploy and configure it, so I won't cover that in this post. But if you want to look at the details of Azure Virtual Network Routing Appliance you can read the documentation on Microsoft learn, [Azure Virtual Network Routing Appliance Documentation](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-routing-appliance-overview). In this post I will instead focus on the a scalability issue that I'm facing, where I run in to limits from the Azure platform and massive costs if I scale out with the current network design. 
 
 Using a more lightweight product in the hub can reduce coast and increase the speed, but with reduced control. In the following sections I will outline how hub-and-spoke is built today and how it can be modified with the use of Azure Virtual Network Routing Appliance.
