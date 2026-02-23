@@ -112,6 +112,7 @@ Result:
 ```
 
 ## Result summary
+
 | Test | Latency (avg) | Throughput single flow | Throughput 10 flows |
 |----------|----------|----------|
 | Direct Peering    | 2.783 ms    | 12.1 Gbits/sec    | n/a    |
