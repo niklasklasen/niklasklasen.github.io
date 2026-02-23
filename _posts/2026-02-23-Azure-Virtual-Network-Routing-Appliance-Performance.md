@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  "DATE-Azure-Virtual-Network-Routing-Appliance-Performance"
+title:  "Azure Virtual Network Routing Appliance Performance"
 categories: 
   - Azure
 toc: true
