@@ -124,6 +124,6 @@ The purpose of this test was to validate the design I presented in my previous p
 I hope that this data will be useful for you and that it's enough to help you consider NVRA in you network in the future. 
 But keep in mind that these numbers are from the public preview of the NVRA service.
 
-| Test | Latency (avg) | Throughput single flow |
+| Test | Latency (avg) | Throughput single flow | Throughput 10 flows |
 |----------|----------|----------|
-| Direct Peering    | 2.783 ms    | 12.1 Gbits/sec    |
+| Direct Peering    | 2.783 ms    | 12.1 Gbits/sec    | n/a    |
