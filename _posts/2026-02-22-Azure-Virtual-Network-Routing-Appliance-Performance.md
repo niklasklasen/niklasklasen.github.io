@@ -119,7 +119,7 @@ Result:
 |Two NVRA|4.218|3.63 Gbits/sec|11.3 Gbits/sec|
 
 ## Conclusion
-The purpose of this test was to validate the design I presented in my previous post where you utilize the NVRA service to build smaller high throughput hubs in each region where you have presence in Azure. Whether the capacity that NVRA can handle will be determined by the applications that you run in Azure, but I would say that it doesn't limit the capacity in a way that would deter me from using it in my scaled out network design once it's generally available. 
+The purpose of this test was to validate the design I presented in my previous post where you utilize the NVRA service to build smaller high throughput hubs in each region where you have presence in Azure. Whether the capacity that NVRA can handle is enough will be determined by the applications that you run in Azure, but I would say that it doesn't limit the capacity in a way that would deter me from using it in my scaled out network design once it's generally available. 
 
 I hope that this data will be useful for you and that it's enough to help you consider NVRA in you network in the future. 
 But keep in mind that these numbers are from the public preview of the NVRA service.
