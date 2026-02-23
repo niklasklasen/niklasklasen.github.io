@@ -112,11 +112,11 @@ Result:
 ```
 
 ## Result summary
-|Test|Latency (avg)|Throughput single flow|Throughput 10 flows|
-|--|--|--|--|
-|Direct Peering|2.783 ms|12.1 Gbits/sec| n/a |
-|One NVRA|4.516 ms|3.57 Gbits/sec|11.5 Gbits/sec|
-|Two NVRA|4.218|3.63 Gbits/sec|11.3 Gbits/sec|
+| Test | Latency (avg) | Throughput single flow | Throughput 10 flows |
+|----------|----------|----------|----------|
+| Direct Peering | 2.783 ms | 12.1 Gbits/sec | n/a |
+| One NVRA | 4.516 ms | 3.57 Gbits/sec | 11.5 Gbits/sec |
+| Two NVRA | 4.218 ms | 3.63 Gbits/sec | 11.3 Gbits/sec |
 
 ## Conclusion
 The purpose of this test was to validate the design I presented in my previous post where you utilize the NVRA service to build smaller high throughput hubs in each region where you have presence in Azure. Whether the capacity that NVRA can handle is enough will be determined by the applications that you run in Azure, but I would say that it doesn't limit the capacity in a way that would deter me from using it in my scaled out network design once it's generally available. 
